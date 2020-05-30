@@ -1,0 +1,10 @@
+body {
+    background:#FFFFFF;
+}
+
+.limiter1300 {
+    width:calc(100% - 2em);
+    max-width:1300px;
+    margin:0 auto;
+    padding:1em;
+}
