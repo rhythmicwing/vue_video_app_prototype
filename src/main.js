@@ -7,6 +7,9 @@ import topPage from './components/topPage.vue';
 import moviePost from './moviePost/moviePost.vue';
 import TP from './components/testpage.vue';
 
+//import './assets/application.js'
+import 'icono'
+
 Vue.use(vueResource);
 Vue.use(VueRouter);
 

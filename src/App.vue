@@ -18,6 +18,9 @@
           <router-link to="/">Home</router-link>
           <router-link to="/TP">TP</router-link>
         </div>
+
+        <fbLogin></fbLogin>
+
       </div>
     </div>
     <!-- <searchIso /> -->
@@ -29,12 +32,22 @@
 <script>
 //import searchIso from './components/searchIso.vue'
 //import topPage from './components/topPage.vue'
+import fbLogin from './components/fbLogin.vue'
 
 export default {
   name: 'App',
+  data() {
+    return {
+
+    }
+  },
   components: {
     //searchIso
     //topPage
+    fbLogin
+  },
+  method: {
+    
   },
   mounted(){
     window.onscroll = function () {
@@ -44,13 +57,16 @@ export default {
 
       if (check >= 100) {
         document.getElementById("topBar").classList.add('fixed');
+        document.getElementById("fakeBackground").classList.add('blur');
       }
 
       if (check < 100) {
         document.getElementById("topBar").classList.remove('fixed');
+        document.getElementById("fakeBackground").classList.remove('blur');
       }
 
     }
+
   }
 }
 </script>
@@ -60,6 +76,8 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  
 }
 
 .topBar {
@@ -69,7 +87,7 @@ export default {
   width:calc(100% - 2em);
 
   &.fixed {
-    background:rgba(255, 255, 255, 0.9);
+    background:rgba(255, 255, 255, 0.8);
     position:fixed;
     z-index:99;
   }

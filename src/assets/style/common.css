@@ -8,3 +8,10 @@ body {
     margin:0 auto;
     padding:1em;
 }
+
+.limiter1100 {
+    width:calc(100% - 2em);
+    max-width:1100px;
+    margin:0 auto;
+    padding:1em;
+}
