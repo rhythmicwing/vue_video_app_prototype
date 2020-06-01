@@ -50,7 +50,7 @@ export default {
     
   },
   mounted() {
-    axios.get(this.topRatedMovies).then(response => {this.results = response.data.results})
+    axios.get(this.popularMovies).then(response => {this.results = response.data.results})
   }
 
 }

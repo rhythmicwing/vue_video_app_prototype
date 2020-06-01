@@ -5,7 +5,7 @@ import App from './App.vue';
 
 import topPage from './components/topPage.vue';
 import moviePost from './moviePost/moviePost.vue';
-import TP from './components/testpage.vue';
+import popMovies from './components/popMovies.vue';
 
 //import './assets/application.js'
 import 'icono'
@@ -16,7 +16,7 @@ Vue.use(VueRouter);
 const routes = [
   { path: '/', component: topPage },
   { path: '/post/:ID', component: moviePost },
-  { path: '/TP', component: TP },
+  { path: '/popMovies', component: popMovies },
 ]
 
 const router = new VueRouter({

@@ -16,10 +16,8 @@
 
         <div class="navigation">
           <router-link to="/">Home</router-link>
-          <router-link to="/TP">TP</router-link>
+          <router-link to="/popMovies">Popular Movies</router-link>
         </div>
-
-        <fbLogin></fbLogin>
 
       </div>
     </div>
@@ -32,7 +30,6 @@
 <script>
 //import searchIso from './components/searchIso.vue'
 //import topPage from './components/topPage.vue'
-import fbLogin from './components/fbLogin.vue'
 
 export default {
   name: 'App',
@@ -44,7 +41,6 @@ export default {
   components: {
     //searchIso
     //topPage
-    fbLogin
   },
   method: {
     
@@ -55,12 +51,12 @@ export default {
       var check = window.pageYOffset;
       console.log(check);
 
-      if (check >= 100) {
+      if (check >= 80) {
         document.getElementById("topBar").classList.add('fixed');
         document.getElementById("fakeBackground").classList.add('blur');
       }
 
-      if (check < 100) {
+      if (check < 80) {
         document.getElementById("topBar").classList.remove('fixed');
         document.getElementById("fakeBackground").classList.remove('blur');
       }
@@ -104,6 +100,10 @@ export default {
       position:relative;
       text-align:right;
       font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+      @media screen and (max-width: $mobile) {
+        transform:scale(0.8);
+      }
 
       .the {
         font-size:20px;
@@ -163,10 +163,17 @@ export default {
       margin-left:3em;
       align-self:center;
 
+      @media screen and (max-width: $mobile) {
+        letter-spacing: 1px;
+        font-size: 14px;
+        margin-left: 1em;
+      }
+
       a {
         text-decoration: none;
         color:#afb6be;
         transition: all 0.5s;
+        margin-right:1em;
 
         &:hover {
           color:#FF7700;

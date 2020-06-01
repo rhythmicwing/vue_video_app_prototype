@@ -56,7 +56,54 @@
 
           </div>
 
-          <div>{{ details }}</div>
+          <div class="third-iso">
+            <div class="titleWrapper">
+              <div class="title">Details</div>
+            </div>
+            
+            <div class="movieInfomations">
+              <div class="movieInfomations-iso" v-if="details.original_title">
+                <div class="mi-title">Original Title</div>
+                <div class="mi-detail">{{details.original_title}}</div>
+              </div>
+              <div class="movieInfomations-iso" v-if="details.budget">
+                <div class="mi-title">Budget</div>
+                <div class="mi-detail">{{details.budget}}</div>
+              </div>
+              <div class="movieInfomations-iso" v-if="details.release_date">
+                <div class="mi-title">Release Date</div>
+                <div class="mi-detail">{{details.release_date}}</div>
+              </div>
+              <div class="movieInfomations-iso">
+                <div class="mi-title">Status</div>
+                <div class="mi-detail">{{details.status}}</div>
+              </div>
+              <div class="movieInfomations-iso" v-if="details.imdb_id">
+                <div class="mi-title"></div>
+                <div class="mi-detail">
+                  <a :href="'https://www.imdb.com/title/' + details.imdb_id" target="_blank">IMDB site</a>
+                </div>
+              </div>
+            </div>
+            
+            <div class="production_companies">
+              <div class="production_companies-iso" v-for="production_companies in details.production_companies" :key="production_companies.id">
+                <img v-if="production_companies.logo_path" :src="'http://image.tmdb.org/t/p/w500/' + production_companies.logo_path " :alt="production_companies.name" :title="production_companies.name" />
+                <div v-else class="pc_tags">{{production_companies.name}}</div>
+              </div>
+            </div>
+            
+          </div>
+
+          <div v-if="details.tagline" class="forth-iso">
+            <div class="quoteWrapper">
+              <div class="quote">&#8216;</div>
+              {{details.tagline}}
+              <div class="quote">,</div>
+            </div>
+          </div>
+
+          <!-- <div>{{ details }}</div> -->
 
           
         </div>
@@ -123,18 +170,27 @@
     position:relative;
     
     .fakeBackground {
-      min-height: 28em;
+      min-height: 31em;
       background-attachment: fixed;
       background-size: cover;
-      background-position-y: top;
+      background-position-y: center;
+      background-position-x: center;
       background-repeat: no-repeat;
-      transition: 0.6s -webkit-filter linear;
+      transition: 0.3s -webkit-filter linear;
       filter: blur(0px);
       position:relative;
       z-index:1;
 
       &.blur {
         filter: blur(8px);
+      }
+
+      @media screen and (max-width: $pad) {
+        min-height:26em;
+      }
+
+      @media screen and (max-width: $mobile) {
+        min-height:20em;
       }
     }
 
@@ -150,6 +206,10 @@
 
       .movieDetails {
         margin-top:-14em;
+
+        @media screen and (max-width: $mobile) {
+          margin-top:-18em;
+        }
       }
 
       .first-iso {
@@ -157,19 +217,34 @@
         justify-content: flex-start;
         align-items: flex-end;
 
+        @media screen and (max-width: $mobile) {
+          flex-wrap:wrap;
+        }
+
         .poster {
           width:12em;
           background:#fff;
           box-shadow: 0 0.25rem 1em 0 rgba(0, 0, 0, 0.3);
           padding:1em;
 
+          @media screen and (max-width: $mobile) {
+            margin:0 auto;
+          }
+
           img {
             width:100%;
+            width:192px;
           }
         }
 
         .titleETC {
           margin-left:2em;
+
+          @media screen and (max-width: $mobile) {
+            margin-left:0;
+            width:100%;
+            margin-top:1em;
+          }
 
           .title {
 
@@ -196,6 +271,7 @@
               color:#333;
               display: flex;
               align-items: center;
+              margin-right:0.7em;
 
               .star {
                 position: relative;
@@ -247,7 +323,6 @@
               color:#333;
               display: flex;
               align-items: center;
-              margin-left:0.7em;
 
               .runtime_num {
                 margin-left:0.2em;
@@ -271,6 +346,7 @@
               padding:0.3em 0.5em;
               margin-right:0.5em;
               border-radius:5px;
+              margin-bottom:0.5em;
             }
           }
         }
@@ -282,9 +358,14 @@
         .plotWrap {
           position:relative;
           width:70%;
-          background:rgb(241, 241, 241);
+          background:rgb(238, 238, 238);
           margin: 3em auto;
-          padding: 2em;
+          padding: 1em;
+
+          @media screen and (max-width: $mobile) {
+            margin:0 0 3em 0;
+            width:calc(100% - 2em);
+          }
 
           &::after {
             z-index: -1;
@@ -315,6 +396,10 @@
             font-size:23px;
             line-height:1.3em;
 
+            @media screen and (max-width: $mobile) {
+              font-size:18px;
+            }
+
             .plotTitle {
               font-weight:bold;
             }
@@ -322,6 +407,121 @@
         }
       }
 
+      .third-iso {
+        .titleWrapper {
+          border-bottom:1px solid #dddddd;
+          padding-bottom:0.8em;
+          margin-bottom:1.5em;
+
+          .title {
+            font-size:25px;
+            font-weight:bold;
+            color:#333;
+          }
+        }
+
+        .movieInfomations {
+          width:100%;
+          max-width:1000px;
+
+          .movieInfomations-iso {
+            font-size:20px;
+            display:flex;
+            justify-content: flex-start;
+            flex-wrap: nowrap;
+            margin-bottom:1em;
+
+            .mi-title {
+              font-weight:bold;
+              color:#666;
+              width:10em;
+            }
+            .mi-detail {
+              color:#333;
+
+              a {
+                color:#afb6be;
+                transition:all 0.5s;
+                text-decoration:none;
+
+                &:hover {
+                  color:#ff7700;
+                  text-decoration:underline;
+                }
+              }
+            }
+          }
+        }
+
+        .production_companies {
+          margin-top:3em;
+          display:flex;
+          justify-content: flex-end;
+          align-items: center;
+          flex-wrap: wrap;
+
+          .production_companies-iso {
+            height:5em;
+            margin-right:1em;
+            margin-bottom:1.5em;
+
+            @media screen and (max-width: $mobile) {
+              height:3em;
+            }
+
+             img {
+              width:auto;
+              height:100%;
+             }
+
+             .pc_tags {
+                font-size:25px;
+                color:#fff;
+                background:#333;
+                padding:0.3em 0.8em;
+                max-width: 250px;
+                line-height: 1.2em;
+                text-align: center;
+                border-radius:10px;
+                position: relative;
+                top: 50%;
+                transform: translateY(-50%);
+
+                @media screen and (max-width: $mobile) {
+                  font-size:20px;
+                  max-width: 200px;
+                }
+             }
+          }
+        }
+
+      }
+      
+      .forth-iso {
+        text-align:center;
+        font-size:35px;
+        font-weight:bold;
+        color:#333;
+        margin-top:1em;
+        margin-bottom:1em;
+
+        @media screen and (max-width: $mobile) {
+          font-size:23px;
+        }
+
+        .quoteWrapper {
+          display:inline-flex;
+          margin:0 auto;
+          align-items: center;
+
+          .quote {
+            color:#ff7700;
+            font-size:80px;
+            margin:0 0.3em;
+          }
+        }
+        
+      }
       
     }
   }
